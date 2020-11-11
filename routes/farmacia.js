@@ -4,8 +4,8 @@ const fs = require("fs")
 const FileEstudiantes = fs.readFileSync('./farmacias.json', 'utf-8')
 const JSONEstudiantes = JSON.parse(FileEstudiantes)
 
-router.get("/", (req, res) => {
-  res.send("API REST Estudianetes")
+router.get("/api", (req, res) => {
+  res.send("API DE CARRITO")
 })
 
 router.get("/farmacia", (req, res) => {
