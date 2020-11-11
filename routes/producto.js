@@ -1,30 +1,27 @@
 const {Router} = require("express")
 const router = Router()
 const fs = require("fs")
-const FileEstudiantes = fs.readFileSync('./farmacias.json', 'utf-8')
-const JSONEstudiantes = JSON.parse(FileEstudiantes)
+const Producto = fs.readFileSync('./productos.json', 'utf-8')
+const JSONproducto = JSON.parse(Producto)
 
 router.get("/api", (req, res) => {
-  res.send("API DE CARRITO")
+  res.send("API DE PRODUCTO")
 })
 
-router.get("/farmacia", (req, res) => {
-  res.json(JSONEstudiantes)
+router.get("/producto", (req, res) => {
+  res.json(JSONproducto)
 })
 
-router.post("/farmacia", (req, res) => {
+router.post("/api/productos", (req, res) => {
   let id = JSONEstudiantes.length + 1
-  let {correo, nombre, apellido, html} = req.body
-  let nuevoEstudiante = {
-    "id" : id,
-    "nombre" : nombre,
-    "apellido" : apellido,
-    "correo" : correo,
-    "html" : html
-  } 
-  JSONEstudiantes.push(nuevoEstudiante)
-  fs.writeFileSync('./farmacias.json', JSON.stringify(JSONEstudiantes), 'utf-8')
-  res.status(201).json(nuevoEstudiante)
+  let {producto, image} = req.body
+  let NewProducto = {
+    "producto" : id,
+    "image" : image
+  }
+  JSONproducto.push(NewProducto)
+  fs.writeFileSync('./productos.json', JSON.stringify(JSONproducto), 'utf-8')
+  res.status(201).json(NewProducto)
 })
 
 router.get("/farmacia/:id", (req,res) => {
